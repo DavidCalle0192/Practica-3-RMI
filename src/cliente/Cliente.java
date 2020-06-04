@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servidorAlertas.sop_rmi;
+package cliente;
 
 /**
  *
  * @author usuario
  */
-public class ServidorAlertas {
+public class Cliente {
 
     /**
      * @param args the command line arguments
