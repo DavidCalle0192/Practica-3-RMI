@@ -5,6 +5,7 @@
  */
 package cliente.sop_rmi;
 
+
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 /**
@@ -28,4 +29,53 @@ public class PacienteCllbckImpl extends UnicastRemoteObject implements PacienteC
     
     @Override
     public void notificar(int id, float ToC) throws RemoteException{}
+
+    
+    
+    
+    
+    public String getNombres() {
+        return nombres;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public String getTipo_id() {
+        return tipo_id;
+    }
+
+    public void setTipo_id(String tipo_id) {
+        this.tipo_id = tipo_id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+    
+    
 }
+
+
+
