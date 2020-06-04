@@ -41,6 +41,8 @@ public class ClsGestionAsintomaticos extends UnicastRemoteObject implements Gest
         
         if(pacientes.get(id)!=null){
             if(ToC<35.2 || ToC > 37.2){
+                System.out.println("El paciente con id "+id+" presenta una T oC de "+ToC
+                        +" que esta fuera del rango normal se procede a notificar");
                 pacientes.get(id).notificar(id, ToC);
             }else{
                 System.out.println("El paciente con id "+id+" presenta una T oC de "+ToC

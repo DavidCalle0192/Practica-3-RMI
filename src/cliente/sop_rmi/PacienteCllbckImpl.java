@@ -28,7 +28,10 @@ public class PacienteCllbckImpl extends UnicastRemoteObject implements PacienteC
     }
     
     @Override
-    public void notificar(int id, float ToC) throws RemoteException{}
+    public void notificar(int id, float ToC) throws RemoteException{
+        System.out.println("El paciente "+nombres+" "+apellidos
+                +" identificado "+tipo_id+" "+id+" presenta una T oC de "+ToC+" la cual está fuera del rango normal");
+    }
 
     
     

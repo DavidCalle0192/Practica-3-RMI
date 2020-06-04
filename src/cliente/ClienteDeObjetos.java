@@ -31,7 +31,7 @@ public class ClienteDeObjetos {
         System.out.println("Cual es el número de puerto por el cual escucha el rmiregistry ");
         numPuertoRMIRegistry = cliente.utilidades.UtilidadesConsola.leerEntero();
 
-        objRemoto = (GestionAsintomaticosInt) UtilidadesRegistroC.obtenerObjRemoto(direccionIpRMIRegistry, numPuertoRMIRegistry, "ObjetoRemotoUsuarios");
+        objRemoto = (GestionAsintomaticosInt) UtilidadesRegistroC.obtenerObjRemoto(direccionIpRMIRegistry, numPuertoRMIRegistry, "ObjetoRemotoGestionAsintomaticos");
         MenuPrincipal();
 
     }
@@ -39,7 +39,6 @@ public class ClienteDeObjetos {
     private static void MenuPrincipal() throws RemoteException {
        
         int aux = 0;//variable para validar la opción 2
-        int aux2 = 0;//variable para controlar la cantidad de pacientes registrados
         int opcion = 0;
         PacienteCllbckImpl objAsintomatico = new PacienteCllbckImpl();
         do {
@@ -53,28 +52,28 @@ public class ClienteDeObjetos {
             switch (opcion) {
                 case 1:
                     aux = 1;
-                    if (aux2 == 5) {
-
-                        System.out.println("La cantidad de pacientes registrados es 5");
+                    System.out.println("Ingrese el id: ");
+                    Scanner leer = new Scanner(System.in);
+                    int dni = leer.nextInt();
+                    if (listadoId.contains(dni)) {
+                        System.out.println("Existe un paciente con ese id!");
+                        System.out.println();
+                        System.out.println("Existe un paciente con ese id!");
                     } else {
-
-                        System.out.println("Validando Existencia de un paciente con el mismo ID");
-                        System.out.println("Ingrese el id: ");
-                        Scanner leer = new Scanner(System.in);
-                        int dni = leer.nextInt();
-                        if (listadoId.contains(dni)) {
-                            System.out.println("Existe un paciente con ese id!");
-                            System.out.println();
-                            System.out.println("Existe un paciente con ese id!");
-                        } else {
-                            listadoId.add(dni);
-                            System.out.println("No existen pacientes con ese ID, se procedera a la creación del nuevo registro.");
-                            Opcion1(dni,objAsintomatico);
-                        }
+                        listadoId.add(dni);
+                        System.out.println("No existen pacientes con ese ID, se procedera a la creación del nuevo registro.");
+                        Opcion1(dni,objAsintomatico);
                     }
+                    
                     break;
                 case 2:
-                    
+                    if (aux == 1){
+                        System.out.println("Ingrese la temperatura: ");
+                        float temperatura = UtilidadesConsola.leerDecimal();
+                        Opcion2(objAsintomatico.getId(),temperatura);
+                        }else{
+                            System.out.println("No existen pacientes registrados.");
+                        }
                     break;
             
                 case 3:
@@ -112,13 +111,21 @@ public class ClienteDeObjetos {
         System.out.println("Ingrese la dirección del paciente ");
         String direccion = UtilidadesConsola.leerCadena();
         objAsintomatico.setDireccion(direccion);
-/*
-        boolean valor = objRemoto.registrarAsintomatico(objAsintomatico);
+
+        boolean valor = objRemoto.registrarAsintomatico(objAsintomatico, id);
         if (valor) {
             System.out.println("Registro realizado satisfactoriamente...");
         } else {
             System.out.println("no se pudo realizar el registro...");
-        }*/
+        }
     }
+    
+    private static boolean Opcion2(int id, float ToC) throws RemoteException{
+     
+
+         System.out.println("Enviando id y temperatura del paciente");
+         return objRemoto.enviarIndicador(id,ToC);
+         
+     }
   
 }
